@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE library SYSTEM "library.dtd">
+<library name="fribidi" basename="FriBidiBase" basetype="FriBidiLibrary" openname="fribidi.library">
+
+    <include>
+    fribidi.h
+    </include>
+
+    <interface name="main" version="1.0" flags="protected" struct="FriBidiIFace" global="IFriBidi" prefix="_impl_" asmprefix="IFriBidi">
+
+        <method name="Obtain" result="uint32"/>
+        <method name="Release" result="uint32"/>
+        <method name="Expunge" result="void" status="unimplemented"/>
+        <method name="Clone" result="struct Interface *" status="unimplemented"/>
+
+        <method name="fribidi_get_joining_type" result="FriBidiJoiningType">
+            <arg name="ch" type="FriBidiChar"/>
+        </method>
+
+        <method name="fribidi_get_joining_types" result="void">
+            <arg name="str" type="const FriBidiChar *"/>
+            <arg name="len" type="const FriBidiStrIndex" />
+            <arg name="jtypes" type="FriBidiJoiningType *"/>
+        </method>
+
+        <method name="fribidi_get_joining_type_name" result="const char *">
+            <arg name="j" type="FriBidiJoiningType"/>
+        </method>
+
+        <method name="fribidi_shape_arabic" result="void">
+            <arg name="flags" type="FriBidiFlags"/>
+            <arg name="embedding_levels" type="const FriBidiLevel *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="ar_props" type="FriBidiArabicProp *"/>
+            <arg name="str" type="FriBidiChar *"/>
+        </method>
+
+        <method name="fribidi_get_par_direction" result="FriBidiParType">
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+        </method>
+
+        <method name="fribidi_get_par_embedding_levels_ex" result="FriBidiLevel">
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="bracket_types" type="const FriBidiBracketType *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="pbase_dir" type="FriBidiParType *"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+        </method>
+
+        <method name="fribidi_reorder_line" result="FriBidiLevel">
+            <arg name="flags" type="FriBidiFlags"/>
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="off" type="const FriBidiStrIndex"/>
+            <arg name="base_dir" type="const FriBidiParType"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+            <arg name="visual_str" type="FriBidiChar *"/>
+            <arg name="map" type="FriBidiStrIndex *"/>
+        </method>
+
+        <method name="fribidi_get_bracket" result="FriBidiBracketType">
+            <arg name="ch" type="FriBidiChar"/>
+        </method>
+
+        <method name="fribidi_get_bracket_types" result="void">
+            <arg name="str" type="const FriBidiChar *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="types" type="const FriBidiCharType *"/>
+            <arg name="btypes" type="FriBidiBracketType *"/>
+        </method>
+
+        <method name="fribidi_charset_to_unicode" result="FriBidiStrIndex">
+            <arg name="char_set" type="FriBidiCharSet"/>
+            <arg name="s" type="const char *"/>
+            <arg name="len" type="FriBidiStrIndex"/>
+            <arg name="us" type="FriBidiChar *"/>
+        </method>
+
+        <method name="fribidi_unicode_to_charset" result="FriBidiStrIndex">
+            <arg name="char_set" type="FriBidiCharSet"/>
+            <arg name="us" type="const FriBidiChar *"/>
+            <arg name="len" type="FriBidiStrIndex"/>
+            <arg name="s" type="char *"/>
+        </method> 
+
+        <method name="fribidi_parse_charset" result="FriBidiCharSet">
+            <arg name="s" type="const char *"/>
+        </method> 
+
+        <method name="fribidi_char_set_name" result="const char *">
+            <arg name="char_set" type="FriBidiCharSet"/>
+        </method> 
+
+        <method name="fribidi_char_set_title" result="const char *">
+            <arg name="char_set" type="FriBidiCharSet"/>
+        </method>  
+
+        <method name="fribidi_char_set_desc" result="const char *">
+            <arg name="char_set" type="FriBidiCharSet"/>
+        </method> 
+
+        <method name="fribidi_debug_status" result="int" />
+
+        <method name="fribidi_set_debug" result="int">
+            <arg name="state" type="int"/>
+        </method>  
+
+        <method name="fribidi_join_arabic" result="void">
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="len" type="const FriBidiStrIndex" />
+            <arg name="embedding_levels" type="const FriBidiLevel *"/>
+            <arg name="ar_props" type="FriBidiArabicProp *"/>
+        </method>
+
+        <method name="fribidi_get_mirror_char" result="fribidi_boolean">
+            <arg name="ch" type="FriBidiChar"/>
+            <arg name="mirrored_ch" type="FriBidiChar *"/>
+        </method> 
+
+        <method name="fribidi_shape_mirroring" result="void">
+            <arg name="embedding_levels" type="const FriBidiLevel *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="str" type="FriBidiChar *"/>
+        </method>    
+
+        <method name="fribidi_shape" result="void">
+            <arg name="flags" type="FriBidiFlags"/>
+            <arg name="embedding_levels" type="const FriBidiLevel *" />
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="ar_props" type="FriBidiArabicProp *"/>
+            <arg name="str" type="FriBidiChar *"/>
+        </method>  
+
+        <method name="fribidi_remove_bidi_marks" result="FriBidiStrIndex">
+            <arg name="str" type="FriBidiChar *"/>
+            <arg name="len" type="const FriBidiStrIndex" />
+            <arg name="positions_to_this" type="FriBidiStrIndex *"/>
+            <arg name="position_from_this_list" type="FriBidiStrIndex *"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+        </method> 
+
+        <method name="fribidi_log2vis" result="FriBidiLevel">
+            <arg name="str" type="const FriBidiChar *"/>
+            <arg name="len" type="const FriBidiStrIndex" />
+            <arg name="pbase_dir" type="FriBidiParType *"/>
+            <arg name="visual_str" type="FriBidiChar *"/>
+            <arg name="positions_L_to_V" type="FriBidiStrIndex *"/>
+            <arg name="positions_V_to_L" type="FriBidiStrIndex *"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+        </method>
+
+        <method name="fribidi_get_bidi_type" result="FriBidiCharType">
+            <arg name="ch" type="FriBidiChar"/>
+        </method> 
+
+        <method name="fribidi_get_bidi_types" result="void">
+            <arg name="str" type="const FriBidiChar *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="btypes" type="FriBidiCharType *"/>
+        </method> 
+
+        <method name="fribidi_get_bidi_type_name" result="const char *">
+            <arg name="t" type="FriBidiCharType"/>
+        </method>
+
+        <method name="fribidi_mirroring_status" result="fribidi_boolean" />
+
+        <method name="fribidi_set_mirroring" result="fribidi_boolean">
+            <arg name="state" type="fribidi_boolean"/>
+        </method>
+
+        <method name="fribidi_reorder_nsm_status" result="fribidi_boolean" />
+
+        <method name="fribidi_set_reorder_nsm" result="fribidi_boolean">
+            <arg name="state" type="fribidi_boolean"/>
+        </method>
+
+        <method name="fribidi_log2vis_get_embedding_levels" result="FriBidiLevel">
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="pbase_dir" type="FriBidiParType *"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+        </method>
+
+        <method name="fribidi_get_type" result="FriBidiCharType">
+            <arg name="ch" type="FriBidiChar"/>
+        </method>
+
+        <method name="fribidi_get_type_internal" result="FriBidiCharType">
+            <arg name="ch" type="FriBidiChar"/>
+        </method>
+
+        <method name="fribidi_get_par_embedding_levels" result="FriBidiLevel">
+            <arg name="bidi_types" type="const FriBidiCharType *"/>
+            <arg name="len" type="const FriBidiStrIndex"/>
+            <arg name="pbase_dir" type="FriBidiParType *"/>
+            <arg name="embedding_levels" type="FriBidiLevel *"/>
+        </method>
+
+    </interface>
+ </library>

@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "fribidi_vectors.h": "c",
+        "fribidi.h": "c",
+        "fribidi-begindecls.h": "c",
+        "iostream": "cpp",
+        "config.h": "c",
+        "fribidi-deprecated.h": "c",
+        "stdio.h": "c"
+    }
+}

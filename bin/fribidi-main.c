@@ -49,7 +49,9 @@
 #ifdef HAVE_STRING_H
 # if STDC_HEADERS && HAVE_MEMORY_H
 # else
-#  include <memory.h>
+#  ifndef __amigaos4__
+#    include <memory.h>
+#  endif
 # endif
 # include <string.h>
 #endif

@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        },
+        {
+            "name": "amiga-cross",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/ppc-amigaos/SDK/clib4/include",
+                "/usr/ppc-amigaos/SDK/clib2/include",
+                "/usr/ppc-amigaos/SDK/newlib/include",
+                "/usr/ppc-amigaos/SDK/local/clib4/include",
+                "/usr/ppc-amigaos/SDK/local/clib2/include",
+                "/usr/ppc-amigaos/SDK/local/newlib/include",
+                "/usr/ppc-amigaos/SDK/local/common/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/ppc-amigaos-gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
