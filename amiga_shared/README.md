@@ -1,4 +1,16 @@
-Configure fribidi project with:
+## AmigaOS4 Fribidi Shared Library
 
-```./configure --prefix=/usr/ppc-amigaos/SDK/local/newlib --host=ppc-amigaos --disable-shared```
+Compile fribidi project with:
 
+```
+cd amiga_shared;
+make
+```
+
+To clean project just execute 
+
+```
+make clean
+```
+
+from `amiga_shared` folder. The command will clean also fribidi lib code in parent dir

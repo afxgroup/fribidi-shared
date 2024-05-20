@@ -16,6 +16,7 @@ AR     = $(CROSS_COMPILE)ar
 LD     = $(CROSS_COMPILE)ld 
 RANLIB = $(CROSS_COMPILE)ranlib 
 RM     = rm -Rf
+CP	   = cp
 
 # Change these as required
 OPTIMIZE = -O2
@@ -51,15 +52,20 @@ $(TARGET): $(OBJS)
 
 libfribidi.a: $(LINKOBJS)
 	$(AR) rcs $@ $(LINKOBJS)
+	$(CP) $@ ./SDK/common/lib/
 
 compilelib:
 ifeq (,$(wildcard ../lib/.libs/libfribidi.a))
-	cd .. ; ./configure --prefix=/usr/ppc-amigaos/SDK/local/newlib --host=ppc-amigaos --disable-shared && make; cd amiga_shared;
+ifeq (,$(wildcard ../configure))
+	cd ..; ./configure --prefix=$(shell pwd)/SDK/common --host=ppc-amigaos --disable-shared; cd amiga_shared;
+endif
+	cd ..; make && make install; cd amiga_shared;
 endif
 
 .PHONY: clean
 clean:
-	$(RM) $(TARGET) *.debug* $(OBJS) $(LINKOBJS) libfribidi.a examples/BidiTest examples/BidiBenchmark
+	cd ..; make clean; cd amiga_shared;
+	$(RM) $(TARGET) *.debug* $(OBJS) $(LINKOBJS) libfribidi.a examples/BidiTest examples/BidiBenchmark SDK
 
 .PHONY: revision
 revision:
