@@ -42,24 +42,24 @@ OBJS = $(SRCS:.c=.o)
 
 LINKOBJS = autoinit_fribidi_base.o autoinit_fribidi_main.o libstubs.o fribidi_globals.o
 
-all: checklib $(TARGET) libfribidi-auto.a
+all: compilelib $(TARGET) libfribidi.a
 
 # Rules for building
 $(TARGET): $(OBJS)
 	$(CC) $(LINK) -nostartfiles -o $@.debug $(OBJS) $(LIBS) -Wl,-L.,--cref,-M,-Map=$@.debug.map
 	$(STRIP) -R.comment $@.debug -o $@
 
-libfribidi-auto.a: $(LINKOBJS)
+libfribidi.a: $(LINKOBJS)
 	$(AR) rcs $@ $(LINKOBJS)
 
-checklib:
+compilelib:
 ifeq (,$(wildcard ../lib/.libs/libfribidi.a))
-	$(error Please compile libfribidi first!)
+	cd .. ; ./configure --prefix=/usr/ppc-amigaos/SDK/local/newlib --host=ppc-amigaos --disable-shared && make; cd amiga_shared;
 endif
 
 .PHONY: clean
 clean:
-	$(RM) $(TARGET) *.debug* $(OBJS) $(LINKOBJS) libfribidi-auto.a examples/BidiTest examples/BidiBenchmark
+	$(RM) $(TARGET) *.debug* $(OBJS) $(LINKOBJS) libfribidi.a examples/BidiTest examples/BidiBenchmark
 
 .PHONY: revision
 revision:
