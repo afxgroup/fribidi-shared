@@ -17,6 +17,7 @@ LD     = $(CROSS_COMPILE)ld
 RANLIB = $(CROSS_COMPILE)ranlib 
 RM     = rm -Rf
 CP	   = cp
+MKDIR  = mkdir -p
 
 # Change these as required
 OPTIMIZE = -O2
@@ -30,7 +31,7 @@ LINK = -gstabs -L../lib/.libs -Wl,--no-undefined
 TARGET = fribidi.library
 
 # Additional linker libraries
-LIBS = -lfribidi
+LIBS = ../lib/.libs/libfribidi.a
 
 # Version of the library to build
 VERSION = 54
@@ -52,12 +53,13 @@ $(TARGET): $(OBJS)
 
 libfribidi.a: $(LINKOBJS)
 	$(AR) rcs $@ $(LINKOBJS)
-	$(CP) $@ ./SDK/common/lib/
+	$(MKDIR) SDK/lib
+	$(CP) $@ ./SDK/lib/
 
 compilelib:
 ifeq (,$(wildcard ../lib/.libs/libfribidi.a))
 ifeq (,$(wildcard ../configure))
-	cd ..; ./configure --prefix=$(shell pwd)/SDK/common --host=ppc-amigaos --disable-shared; cd amiga_shared;
+	cd ..; ./configure --prefix=$(shell pwd)/SDK --host=ppc-amigaos --disable-shared; cd amiga_shared;
 endif
 	cd ..; make && make install; cd amiga_shared;
 endif
